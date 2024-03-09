@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id           String   @id @default(uuid())
+  type_account String
+  type         Decimal
+  adm_id       String?  @unique
+  user_id      String?  @unique
+  created_at   DateTime @default(now())
+
+  @@map("accounts")
+}
+
+model Adm {
+  id         String    @id @default(uuid())
+  username   String    @unique
+  password   String
+  created_at DateTime  @default(now())
+  Product    Product[]
+
+  @@map("adms")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  Order      Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String   @unique
+  link_img    String   @unique
+  unit_price  Int
+  created_at  DateTime @default(now())
+  adm         Adm      @relation(fields: [adm_id], references: [id])
+  adm_id      String
+  Order       Order[]
+
+  @@map("products")
+}
+
+model Order {
+  id               String   @id @default(uuid())
+  quantity_product Int
+  total_price      Int
+  created_at       DateTime @default(now())
+  product          Product  @relation(fields: [product_id], references: [id])
+  product_id       String
+  user             User     @relation(fields: [user_id], references: [id])
+  user_id          String
+}

@@ -22,10 +22,11 @@ export class PrismaProductRepository implements ProductRepository {
     return product
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string, adm_id: string): Promise<void> {
     await prisma.product.delete({
       where: {
         id,
+        adm_id,
       },
     })
   }

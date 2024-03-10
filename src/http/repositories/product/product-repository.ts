@@ -27,5 +27,5 @@ export interface ProductRepository {
     link_img,
     unit_price,
   }: UpdateProduct): Promise<Product | null>
-  delete(id: string): Promise<void>
+  delete(id: string, adm_id: string): Promise<void>
 }

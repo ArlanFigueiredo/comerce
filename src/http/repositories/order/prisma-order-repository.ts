@@ -3,6 +3,11 @@ import { OrderRepository } from './order-repository'
 import { prisma } from '@/lib/prisma'
 
 export class PrismaOrderRepository implements OrderRepository {
+  async findAllOrder(): Promise<Order[] | null> {
+    const order = await prisma.order.findMany()
+    return order
+  }
+
   async findByUser(user_id: string): Promise<Order | null> {
     const order = await prisma.order.findFirst({
       where: {

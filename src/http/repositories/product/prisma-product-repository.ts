@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma'
 
 interface UpdateProduct {
   id: string
+  adm_id: string
   name: string
   description: string
   link_img: string
@@ -11,6 +12,16 @@ interface UpdateProduct {
 }
 
 export class PrismaProductRepository implements ProductRepository {
+  async findProductAdm(id: string, adm_id: string): Promise<Product | null> {
+    const product = await prisma.product.findFirst({
+      where: {
+        id,
+        adm_id,
+      },
+    })
+    return product
+  }
+
   async delete(id: string): Promise<void> {
     await prisma.product.delete({
       where: {
@@ -21,6 +32,7 @@ export class PrismaProductRepository implements ProductRepository {
 
   async update({
     id,
+    adm_id,
     name,
     description,
     link_img,
@@ -35,6 +47,7 @@ export class PrismaProductRepository implements ProductRepository {
       },
       where: {
         id,
+        adm_id,
       },
     })
     return product

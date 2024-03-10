@@ -2,6 +2,7 @@ import { Prisma, Product } from '@prisma/client'
 
 interface UpdateProduct {
   id: string
+  adm_id: string
   name: string
   description: string
   link_img: string
@@ -9,6 +10,7 @@ interface UpdateProduct {
 }
 
 export interface ProductRepository {
+  findProductAdm(id: string, adm_id: string): Promise<Product | null>
   findProduct(
     name: string,
     description: string,
@@ -19,6 +21,7 @@ export interface ProductRepository {
   create(data: Prisma.ProductCreateManyInput): Promise<Product>
   update({
     id,
+    adm_id,
     name,
     description,
     link_img,

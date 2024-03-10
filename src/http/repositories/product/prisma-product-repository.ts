@@ -2,7 +2,44 @@ import { Prisma, Product } from '@prisma/client'
 import { ProductRepository } from './product-repository'
 import { prisma } from '@/lib/prisma'
 
+interface UpdateProduct {
+  id: string
+  name: string
+  description: string
+  link_img: string
+  unit_price: number
+}
+
 export class PrismaProductRepository implements ProductRepository {
+  async delete(id: string): Promise<void> {
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    })
+  }
+
+  async update({
+    id,
+    name,
+    description,
+    link_img,
+    unit_price,
+  }: UpdateProduct): Promise<Product | null> {
+    const product = await prisma.product.update({
+      data: {
+        name,
+        description,
+        link_img,
+        unit_price,
+      },
+      where: {
+        id,
+      },
+    })
+    return product
+  }
+
   async findProduct(
     name: string,
     description: string,

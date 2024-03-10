@@ -3,9 +3,11 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { factorieRegisterOrder } from '@/http/use-cases/order/factories/register'
 import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
+import { factorieServiceSendingEmailRegisterOrder } from '@/services/factories/sendingEmailRegisterOrder'
 
 export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
   const registerOrderFactories = factorieRegisterOrder()
+  const sendingEmail = factorieServiceSendingEmailRegisterOrder()
 
   const registerBodySchema = z.object({
     quantity_product: z.coerce.number(),
@@ -21,12 +23,19 @@ export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
   const { product_id, user_id } = registerParamsSchema.parse(req.params)
 
   try {
-    await registerOrderFactories.execute({
+    const result = await registerOrderFactories.execute({
       quantity_product,
       total_price,
       product_id,
       user_id,
     })
+    await sendingEmail.serviceSendingEmail({
+      email: result.user.email,
+      name_product: result.product.name,
+      quantity_product: result.order.quantity_product,
+      unit_price: result.product.unit_price,
+    })
+
     return res.status(201).send({
       message: 'Order created successsfully!',
     })

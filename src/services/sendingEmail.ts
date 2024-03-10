@@ -7,8 +7,8 @@ interface IEnvSendEmail {
   text: string
   html: string
 }
-export class EnvSendEmail {
-  async envSendEmail({
+export class SendingEmail {
+  async sedingEmail({
     from,
     to,
     subject,

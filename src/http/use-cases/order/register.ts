@@ -3,10 +3,12 @@ import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { OrderRepository } from '@/http/repositories/order/order-repository'
 import { ProductRepository } from '@/http/repositories/product/product-repository'
 import { UserRepository } from '@/http/repositories/user/user-repository'
-import { Order } from '@prisma/client'
+import { Order, Product, User } from '@prisma/client'
 
 interface RegisterOrderUseCaseResponse {
   order: Order
+  user: User
+  product: Product
 }
 
 interface RegisterOrderUseCaseRequest {
@@ -29,14 +31,14 @@ export class RegisterOrderUseCase {
     product_id,
     user_id,
   }: RegisterOrderUseCaseRequest): Promise<RegisterOrderUseCaseResponse> {
-    const userExists = await this.userRepository.findById(user_id)
-    if (!userExists) {
+    const user = await this.userRepository.findById(user_id)
+    if (!user) {
       throw new UserDoesNotExistError()
     }
 
-    const productExists = await this.productRepository.findById(product_id)
+    const product = await this.productRepository.findById(product_id)
 
-    if (!productExists) {
+    if (!product) {
       throw new ProducDoesNotExistsError()
     }
 
@@ -48,6 +50,8 @@ export class RegisterOrderUseCase {
     })
     return {
       order,
+      user,
+      product,
     }
   }
 }

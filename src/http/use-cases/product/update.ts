@@ -1,5 +1,6 @@
 import { AdmDoesNotExistsError } from '@/error/adm/admDoesNotExistsError'
 import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
+import { ProductAlredyExistError } from '@/error/product/productalredyexisterror'
 import { AdmRepository } from '@/http/repositories/adm/adm-repository'
 import { ProductRepository } from '@/http/repositories/product/product-repository'
 import { Product } from '@prisma/client'
@@ -41,6 +42,16 @@ export class UpdateProductUseCase {
       id,
       adm_id,
     )
+
+    const findProduct = await this.productRepository.findProduct(
+      name,
+      description,
+      link_img,
+    )
+
+    if (findProduct) {
+      throw new ProductAlredyExistError()
+    }
 
     if (!productExists) {
       throw new ProducDoesNotExistsError()

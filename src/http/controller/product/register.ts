@@ -16,11 +16,16 @@ export async function registerProduct(req: FastifyRequest, res: FastifyReply) {
     description: z.string(),
     link_img: z.coerce.string(),
     unit_price: z.coerce.number(),
+  })
+
+  const registerParamsSchema = z.object({
     adm_id: z.coerce.string(),
   })
 
-  const { name, description, link_img, unit_price, adm_id } =
-    registerBodySchema.parse(req.body)
+  const { adm_id } = registerParamsSchema.parse(req.params)
+  const { name, description, link_img, unit_price } = registerBodySchema.parse(
+    req.body,
+  )
   // const {  } = registerParamsSchema.parse(req.params)
 
   try {
@@ -43,6 +48,8 @@ export async function registerProduct(req: FastifyRequest, res: FastifyReply) {
         error: error.message,
       })
     }
-    return res.status(500).send()
+    return res.status(500).send({
+      error,
+    })
   }
 }

@@ -13,7 +13,7 @@ export async function appRoutes(app: FastifyInstance) {
   app.post('/adm', registerAdm)
 
   app.get('/products', getAllProducts)
-  app.post('/products', registerProduct)
+  app.post('/product/:adm_id', registerProduct)
   app.put('/product/:id/:adm_id', updateProduct)
   app.delete('/product', deleteProduct)
 

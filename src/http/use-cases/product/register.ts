@@ -34,13 +34,12 @@ export class RegisterProductUseCase {
       description,
       link_img,
     )
-
+    console.log(productExist)
     if (productExist) {
       throw new ProductAlredyExistError()
     }
 
     const admExists = await this.admRepository.findById(adm_id)
-    console.log(admExists)
 
     if (!admExists) {
       throw new AdmDoesNotExistsError()

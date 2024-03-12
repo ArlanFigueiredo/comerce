@@ -7,15 +7,20 @@ import { getAllProducts } from '../controller/product/get-products'
 import { getAllOrders } from '../controller/order/get'
 import { updateProduct } from '../controller/product/update'
 import { deleteProduct } from '../controller/product/delete'
+import { registerTokenPassword } from '../controller/password/register'
+import { recoverPassword } from '../controller/user/recover-password'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
+  app.put('/recoverpassword', recoverPassword)
   app.post('/adm', registerAdm)
 
   app.get('/products', getAllProducts)
   app.post('/product/:adm_id', registerProduct)
   app.put('/product/:id/:adm_id', updateProduct)
-  app.delete('/product', deleteProduct)
+  app.delete('/product/:id/:adm_id', deleteProduct)
+
+  app.post('/password', registerTokenPassword)
 
   app.post('/order/:product_id/:user_id', registerOrder)
   app.get('/orders', getAllOrders)

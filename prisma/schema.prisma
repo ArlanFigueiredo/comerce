@@ -35,13 +35,13 @@ model Adm {
 }
 
 model User {
-  id              String            @id @default(uuid())
-  name            String
-  email           String            @unique
-  password        String
-  created_at      DateTime          @default(now())
-  Order           Order[]
-  RecoverPassword RecoverPassword[]
+  id         String     @id @default(uuid())
+  name       String
+  email      String     @unique
+  password   String
+  created_at DateTime   @default(now())
+  Order      Order[]
+  Password   Password[]
 
   @@map("users")
 }
@@ -69,14 +69,17 @@ model Order {
   product_id       String
   user             User     @relation(fields: [user_id], references: [id])
   user_id          String
+
+  @@map("orders")
 }
 
-model RecoverPassword {
-  id      String  @id @default(uuid())
+model Password {
+  id      String @id @default(uuid())
   email   String
-  used    Decimal
-  user    User    @relation(fields: [user_id], references: [id])
+  token   String @unique @default(uuid())
+  used    Int
+  user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
-  @@map("recover_passwords")
+  @@map("passwords")
 }

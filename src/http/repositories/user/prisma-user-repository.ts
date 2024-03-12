@@ -3,6 +3,18 @@ import { UserRepository } from './user-repository'
 import { prisma } from '@/lib/prisma'
 
 export class PrismaUserRepository implements UserRepository {
+  async updatePassword(id: string, password: string): Promise<User> {
+    const user = await prisma.user.update({
+      data: {
+        password,
+      },
+      where: {
+        id,
+      },
+    })
+    return user
+  }
+
   async findById(id: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {

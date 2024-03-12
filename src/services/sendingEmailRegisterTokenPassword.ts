@@ -1,20 +1,22 @@
 import { SendingEmail } from './sendingEmail'
 
-interface ServiceSendingEmailRegisterUserRequest {
+interface ServiceSendingEmailRegisterTokenPasswordRequest {
   email: string
+  token: string
 }
 
-export class ServiceSendingEmailRegisterUser {
+export class ServiceSendingEmailRegisterTokenPassword {
   constructor(private sendingEmail: SendingEmail) {}
 
   async serviceSendingEmail({
     email,
-  }: ServiceSendingEmailRegisterUserRequest): Promise<void> {
+    token,
+  }: ServiceSendingEmailRegisterTokenPasswordRequest): Promise<void> {
     await this.sendingEmail.sedingEmail({
       from: 'arlan.carloz@gmail.com',
       to: email,
-      subject: 'User created successfully',
-      text: 'Seja bem vindo a PEN',
+      subject: 'Token de recuperação de senha.',
+      text: 'Recupere sua senha.',
       html: `
       
       <!DOCTYPE html>
@@ -49,6 +51,8 @@ export class ServiceSendingEmailRegisterUser {
               line-height: 1.6;
           }
           .button {
+              display: flex;
+              justify-content-center: center;
               display: inline-block;
               padding: 10px 20px;
               background-color: #007bff;
@@ -69,11 +73,8 @@ export class ServiceSendingEmailRegisterUser {
       <div class="container">
           <h1>Bem-Vindo à Loja PEN!</h1>
           <p>Olá,</p>
-          <p>Seja bem-vindo à nossa loja! Estamos muito felizes em tê-lo(a) como nosso cliente.</p>
-          <p>Aqui na Loja PEN, oferecemos uma grande variedade de produtos para atender às suas necessidades. Fique à vontade para explorar nosso site e descobrir tudo o que temos a oferecer.</p>
-          <p>Se tiver alguma dúvida ou precisar de assistência, não hesite em entrar em contato conosco. Estamos aqui para ajudar!</p>
-          <p>Para começar suas compras, clique no botão abaixo:</p>
-          <p><a href="#" class="button" style="color: #fff;">Explorar produtos</a></p>
+          <p>Token de recuperação de senha</p>
+          <p><a href="#" class="button" style="color: #fff;">${token}</a></p>
           <p>Atenciosamente,<br>Equipe Loja PEN</p>
       </div>
       </body>

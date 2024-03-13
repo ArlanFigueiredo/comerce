@@ -1,5 +1,5 @@
 import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
-import { AccountRepository } from '@/http/repositories/accout/accout-repository'
+// import { AccountRepository } from '@/http/repositories/accout/accout-repository'
 import { UserRepository } from '@/http/repositories/user/user-repository'
 import { User } from '@prisma/client'
 import { hash } from 'bcryptjs'
@@ -16,7 +16,7 @@ interface RegisterUserUseCaseResponse {
 export class RegisterUserUseCase {
   constructor(
     private userRepository: UserRepository,
-    private accountRepository: AccountRepository,
+    // private accountRepository: AccountRepository,
   ) {}
 
   async execute({
@@ -38,12 +38,12 @@ export class RegisterUserUseCase {
       password: password_hash,
     })
 
-    await this.accountRepository.create({
-      type_account: 'User',
-      type: 0,
-      adm_id: undefined,
-      user_id: user.id,
-    })
+    // await this.accountRepository.create({
+    //   type_account: 'User',
+    //   type: 0,
+    //   adm_id: undefined,
+    //   user_id: user.id,
+    // })
 
     return {
       user,

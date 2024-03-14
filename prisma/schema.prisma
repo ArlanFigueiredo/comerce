@@ -83,3 +83,12 @@ model Password {
 
   @@map("passwords")
 }
+
+model ImgProdut {
+  id         String   @id @default(uuid())
+  product_id String
+  link_file  String
+  created_at DateTime @default(now())
+
+  @@map("img_products")
+}

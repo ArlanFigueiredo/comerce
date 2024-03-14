@@ -1,4 +1,4 @@
-export class ProducDoesNotExistsError extends Error {
+export class ProductDoesNotExistsError extends Error {
   constructor() {
     super('Product does not exists.')
   }

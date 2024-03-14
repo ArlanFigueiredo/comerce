@@ -32,6 +32,8 @@
     "decimal": "0.0.2",
     "dotenv": "16.4.5",
     "fastify": "4.26.1",
+    "fastify-multer": "2.0.3",
+    "multer": "1.4.5-lts.1",
     "nodemailer": "6.9.12",
     "zod": "3.22.4"
   }

@@ -3,7 +3,6 @@ import { ZodError } from 'zod'
 import { env } from './env'
 import { appRoutes } from './http/routes/routes'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-
 export const app = fastify()
 
 app.register(appRoutes)

@@ -10,6 +10,11 @@ interface UpdateUser {
 }
 
 export class PrismaUserRepository implements UserRepository {
+  async findAllUsers(): Promise<User[] | null> {
+    const user = await prisma.user.findMany()
+    return user
+  }
+
   async update({
     id,
     name,

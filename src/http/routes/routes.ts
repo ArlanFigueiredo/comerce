@@ -10,8 +10,10 @@ import { deleteProduct } from '../controller/product/delete'
 import { registerTokenPassword } from '../controller/password/register'
 import { recoverPassword } from '../controller/user/recover-password'
 import { updateUser } from '../controller/user/update'
+import { getAllUsers } from '../controller/user/get'
 
 export async function appRoutes(app: FastifyInstance) {
+  app.get('/users', getAllUsers)
   app.post('/users', register)
   app.put('/user/:id', updateUser)
 

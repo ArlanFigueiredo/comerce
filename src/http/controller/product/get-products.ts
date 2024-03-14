@@ -10,6 +10,8 @@ export async function getAllProducts(req: FastifyRequest, res: FastifyReply) {
       products,
     })
   } catch (error) {
-    return res.status(500).send()
+    return res.status(500).send({
+      error,
+    })
   }
 }

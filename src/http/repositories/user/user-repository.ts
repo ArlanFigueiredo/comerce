@@ -8,6 +8,7 @@ interface UpdateUser {
 }
 
 export interface UserRepository {
+  findAllUsers(): Promise<User[] | null>
   update({ id, name, email, password }: UpdateUser): Promise<User | null>
   updatePassword(id: string, password: string): Promise<User>
   findById(id: string): Promise<User | null>

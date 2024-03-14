@@ -2,7 +2,33 @@ import { Prisma, User } from '@prisma/client'
 import { UserRepository } from './user-repository'
 import { prisma } from '@/lib/prisma'
 
+interface UpdateUser {
+  id: string
+  name?: string
+  email?: string
+  password?: string
+}
+
 export class PrismaUserRepository implements UserRepository {
+  async update({
+    id,
+    name,
+    email,
+    password,
+  }: UpdateUser): Promise<User | null> {
+    const user = await prisma.user.update({
+      data: {
+        name,
+        email,
+        password,
+      },
+      where: {
+        id,
+      },
+    })
+    return user
+  }
+
   async updatePassword(id: string, password: string): Promise<User> {
     const user = await prisma.user.update({
       data: {

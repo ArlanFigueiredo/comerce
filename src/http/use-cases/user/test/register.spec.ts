@@ -19,7 +19,7 @@ describe('Register User Use Case', () => {
     expect(isPasswordCorrectlyHashed).toBe(true)
   })
 
-  it('checked user not cadaster two multiplicated', async () => {
+  it('Checking if the user is not registering twice', async () => {
     const inMemoryUserRepository = new ImMemoryUserRepository()
     const registerUserUseCase = new RegisterUserUseCase(inMemoryUserRepository)
 

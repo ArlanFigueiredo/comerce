@@ -12,12 +12,17 @@ import { recoverPassword } from '../controller/user/recover-password'
 import { updateUser } from '../controller/user/update'
 import { getAllUsers } from '../controller/user/get'
 import { authenticateUser } from '../controller/user/authenticate'
+import { profile } from '../controller/user/profile'
+import { verifyJWT } from '../controller/middleware/verify-jwt'
+import { refresh } from '../controller/user/refersh'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/users', getAllUsers)
   app.post('/users', register)
-  app.put('/user/:id', updateUser)
+  app.put('/user/:id', { onRequest: [verifyJWT] }, updateUser)
   app.post('/authenticate', authenticateUser)
+  app.get('/me', { onRequest: [verifyJWT] }, profile)
+  app.patch('/token/refresh', refresh)
 
   app.put('/recoverpassword', recoverPassword)
   app.post('/adm', registerAdm)

@@ -26,9 +26,7 @@ export class UpdateUserUseCase {
       throw new UserDoesNotExistError()
     }
 
-    const userByEmail = await this.userRepository.findByEmail(userExist.email)
-
-    if (userByEmail) {
+    if (email === userExist.email) {
       throw new UserAlredyExistError()
     }
 

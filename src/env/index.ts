@@ -3,8 +3,8 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+  JWT_SECRET: z.coerce.string(),
   PORT: z.coerce.number().default(3333),
-  SEND_EMAIL_CREATE_USER: z.coerce.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

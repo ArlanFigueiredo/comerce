@@ -2,16 +2,14 @@ import { expect, describe, it } from 'vitest'
 import { RegisterUserUseCase } from '../register'
 import { compare } from 'bcryptjs'
 import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
-import { factorieRegisterPassword } from '../../password/factories/register'
-import { factorieRecoverPassword } from '../factories/recover-password'
+
+import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
 
 describe('Register User Use Case', () => {
   it('should hash user password upon registration', async () => {
-    const registerUserUseCase = new RegisterUserUseCase(
+    const { user } = await new RegisterUserUseCase(
       new ImMemoryUserRepository(),
-    )
-
-    const { user } = await registerUserUseCase.execute({
+    ).execute({
       name: 'ExampleName',
       email: 'example1@example.com',
       password: '123456',
@@ -21,45 +19,24 @@ describe('Register User Use Case', () => {
     expect(isPasswordCorrectlyHashed).toBe(true)
   })
 
-  it('Testing and the password recovery functionality is working', async () => {
-    const registerPasswordFactory = factorieRegisterPassword()
+  it('checked user not cadaster two multiplicated', async () => {
+    const inMemoryUserRepository = new ImMemoryUserRepository()
+    const registerUserUseCase = new RegisterUserUseCase(inMemoryUserRepository)
 
-    const token = await registerPasswordFactory.execute({
+    inMemoryUserRepository.create({
+      id: '0001',
+      name: 'Arlan Figueiredo',
       email: 'example1@example.com',
-      used: 0,
+      password: '123456',
+      created_at: new Date(),
     })
 
-    const recoverPasswordFactory = factorieRecoverPassword()
-
-    const recoverpassword = await recoverPasswordFactory.execute({
-      token: token.password.token,
-      password: '123456789',
-    })
-    const password_hash1 = await compare(
-      '123456789',
-      recoverpassword.user.password,
-    )
-    expect(password_hash1).toBe(true)
-  })
-
-  it('Testing and the password recovery functionality is working, part two', async () => {
-    const registerPasswordFactory = factorieRegisterPassword()
-
-    const token = await registerPasswordFactory.execute({
-      email: 'example1@example.com',
-      used: 0,
-    })
-
-    const recoverPasswordFactory = factorieRecoverPassword()
-
-    const recoverpassword = await recoverPasswordFactory.execute({
-      token: token.password.token,
-      password: '123456789',
-    })
-    const password_hash1 = await compare(
-      '12345678',
-      recoverpassword.user.password,
-    )
-    expect(password_hash1).toBe(false)
+    await expect(() =>
+      registerUserUseCase.execute({
+        name: 'Arlan Figueiredo',
+        email: 'example1@example.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(UserAlredyExistError)
   })
 })

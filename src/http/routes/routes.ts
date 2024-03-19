@@ -11,11 +11,13 @@ import { registerTokenPassword } from '../controller/password/register'
 import { recoverPassword } from '../controller/user/recover-password'
 import { updateUser } from '../controller/user/update'
 import { getAllUsers } from '../controller/user/get'
+import { authenticateUser } from '../controller/user/authenticate'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/users', getAllUsers)
   app.post('/users', register)
   app.put('/user/:id', updateUser)
+  app.post('/authenticate', authenticateUser)
 
   app.put('/recoverpassword', recoverPassword)
   app.post('/adm', registerAdm)

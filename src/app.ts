@@ -5,8 +5,10 @@ import { appRoutes } from './http/routes/routes'
 import { fastifyCookie } from '@fastify/cookie'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import fastifyJwt from '@fastify/jwt'
+import cors from '@fastify/cors'
 export const app = fastify()
 
+app.register(cors)
 app.register(fastifyCookie)
 
 app.register(fastifyJwt, {

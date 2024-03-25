@@ -14,5 +14,6 @@ export async function profile(req: FastifyRequest, res: FastifyReply) {
       ...user,
       password: undefined,
     },
+    status: true,
   })
 }

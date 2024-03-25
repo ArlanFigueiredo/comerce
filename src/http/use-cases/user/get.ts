@@ -9,7 +9,9 @@ export class GetUserUseCase {
   constructor(private userRepository: UserRepository) {}
   async execute(): Promise<GetUserUseCaseResponse> {
     const user = await this.userRepository.findAllUsers()
-
+    user?.forEach((users) => {
+      users.password = ''
+    })
     return {
       user,
     }

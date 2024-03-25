@@ -7,7 +7,7 @@ export async function getAllUsers(req: FastifyRequest, res: FastifyReply) {
   try {
     const user = await getUserFactory.execute()
     return res.status(201).send({
-      user,
+      user: user.user,
     })
   } catch (error) {
     return res.status(500).send({

@@ -22,6 +22,7 @@ export async function authenticateUser(req: FastifyRequest, res: FastifyReply) {
       {
         sign: {
           sub: user.user?.id,
+          expiresIn: '60m',
         },
       },
     )

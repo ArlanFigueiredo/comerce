@@ -14,12 +14,13 @@ export async function registerAdm(req: FastifyRequest, res: FastifyReply) {
   const { username, password } = registerBodySchema.parse(req.body)
 
   try {
-    await factorieAdmRegister.execute({
+    const adm = await factorieAdmRegister.execute({
       username,
       password,
     })
     return res.status(200).send({
       message: 'Account created successfully!',
+      adm,
     })
   } catch (error) {
     if (error instanceof AdmAlredyExistsError) {

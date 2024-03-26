@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { factorieRegisterOrder } from '@/http/use-cases/order/factories/register'
-import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { factorieServiceSendingEmailRegisterOrder } from '@/services/factories/sendingEmailRegisterOrder'
+import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 
 export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
   const registerOrderFactories = factorieRegisterOrder()
@@ -41,7 +41,7 @@ export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
     })
   } catch (error) {
     if (
-      error instanceof ProducDoesNotExistsError ||
+      error instanceof ProductDoesNotExistsError ||
       error instanceof UserDoesNotExistError
     ) {
       return res.status(409).send({

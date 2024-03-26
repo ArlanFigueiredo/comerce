@@ -1,4 +1,4 @@
-import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
+import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { OrderRepository } from '@/http/repositories/order/order-repository'
 import { ProductRepository } from '@/http/repositories/product/product-repository'
@@ -39,7 +39,7 @@ export class RegisterOrderUseCase {
     const product = await this.productRepository.findById(product_id)
 
     if (!product) {
-      throw new ProducDoesNotExistsError()
+      throw new ProductDoesNotExistsError()
     }
 
     const order = await this.orderRepository.create({

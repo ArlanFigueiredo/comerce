@@ -1,5 +1,5 @@
 import { AdmDoesNotExistsError } from '@/error/adm/admDoesNotExistsError'
-import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
+import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { ProductAlredyExistError } from '@/error/product/productalredyexisterror'
 import { factorieUpdateProduct } from '@/http/use-cases/product/factories/updaate'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -42,7 +42,7 @@ export async function updateProduct(req: FastifyRequest, res: FastifyReply) {
   } catch (error) {
     if (
       error instanceof AdmDoesNotExistsError ||
-      error instanceof ProducDoesNotExistsError ||
+      error instanceof ProductDoesNotExistsError ||
       error instanceof ProductAlredyExistError
     ) {
       return res.status(409).send({

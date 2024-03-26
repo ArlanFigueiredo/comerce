@@ -1,5 +1,5 @@
 import { AdmDoesNotExistsError } from '@/error/adm/admDoesNotExistsError'
-import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
+import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { factorieDeleteProduct } from '@/http/use-cases/product/factories/delete'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
@@ -25,7 +25,7 @@ export async function deleteProduct(req: FastifyRequest, res: FastifyReply) {
   } catch (error) {
     if (
       error instanceof AdmDoesNotExistsError ||
-      error instanceof ProducDoesNotExistsError
+      error instanceof ProductDoesNotExistsError
     ) {
       return res.status(409).send({
         message: error.message,

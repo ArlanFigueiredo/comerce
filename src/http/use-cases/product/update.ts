@@ -1,5 +1,5 @@
 import { AdmDoesNotExistsError } from '@/error/adm/admDoesNotExistsError'
-import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'
+import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'
 import { ProductAlredyExistError } from '@/error/product/productalredyexisterror'
 import { AdmRepository } from '@/http/repositories/adm/adm-repository'
 import { ProductRepository } from '@/http/repositories/product/product-repository'
@@ -54,7 +54,7 @@ export class UpdateProductUseCase {
     }
 
     if (!productExists) {
-      throw new ProducDoesNotExistsError()
+      throw new ProductDoesNotExistsError()
     }
 
     const product = await this.productRepository.update({

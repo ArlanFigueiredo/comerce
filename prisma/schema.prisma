@@ -92,3 +92,21 @@ model ImgProdut {
 
   @@map("img_products")
 }
+
+model Contact {
+  id       String @id @default(uuid())
+  name     String
+  lastName String
+  email    String
+  message  String
+
+  @@map("contacts")
+}
+
+model SendPromotation {
+  id     String  @id @default(uuid())
+  userId String?
+  email  String
+
+  @@map("send_promotations")
+}

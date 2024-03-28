@@ -1,22 +1,14 @@
 import { SendingEmail } from './sendingEmail'
 
-interface ServiceSendingEmailRegisterTokenPasswordRequest {
-  email: string
-  token: string
-}
-
-export class ServiceSendingEmailRegisterTokenPassword {
+export class ServiceSendingEmailSendPromotation {
   constructor(private sendingEmail: SendingEmail) {}
 
-  async serviceSendingEmail({
-    email,
-    token,
-  }: ServiceSendingEmailRegisterTokenPasswordRequest): Promise<void> {
+  async serviceSendingEmail(email: string): Promise<void> {
     await this.sendingEmail.sedingEmail({
       from: 'arlan.carloz@gmail.com',
       to: email,
-      subject: 'Token de recuperação de senha.',
-      text: 'Recupere sua senha.',
+      subject: 'Agora você irá ficar por dentro de todas as promoções',
+      text: 'Fique ligado!',
       html: `
       
       <!DOCTYPE html>
@@ -71,11 +63,11 @@ export class ServiceSendingEmailRegisterTokenPassword {
       </head>
       <body>
       <div class="container">
-          <h1>Bem-Vindo à Loja PEN!</h1>
-          <p>Olá,</p>
+          <h1>Só aqui na STYLUS você encontra</h1>
+          <p></p>
           <p>Token de recuperação de senha</p>
-          <p><a href=" http://192.168.2.6:3000/stylus/recoverpassword/${token}" class="button" style="color: #fff;">Recuperar senha</a></p>
-          <p>Atenciosamente,<br>Equipe Loja PEN</p>
+          <p><a href="#" class="button" style="color: #fff;">Clique aqui para ver os produtos</a></p>
+          <p>Atenciosamente,<br>Equipe STYLUS</p>
       </div>
       </body>
       </html>

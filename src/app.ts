@@ -27,13 +27,13 @@ app.register(appRoutes)
 app.setErrorHandler((error, _, res) => {
   if (error instanceof ZodError) {
     return res.status(400).send({
-      message: 'Validation Error',
+      message: 'Por favor, forneça credenciais autenticas.',
       issues: error.format(),
     })
   }
   if (error instanceof PrismaClientKnownRequestError) {
     return res.status(400).send({
-      message: 'Validation Error',
+      message: 'Validation Error PRISMA STATUSCODE 400',
       issues: error.message,
     })
   }

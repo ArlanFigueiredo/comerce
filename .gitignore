@@ -2,3 +2,7 @@ node_modules
 build
 .env
 dist
+
+postgres://nodedeploy_pg_khd1_user:dci5mvxZXKRRhta4HuEdEgwbbiLuFaBx@dpg-co1hrbo21fec73d2sh5g-a/nodedeploy_pg_khd1
+
+postgres://nodedeploy_pg_khd1_user:dci5mvxZXKRRhta4HuEdEgwbbiLuFaBx@dpg-co1hrbo21fec73d2sh5g-a/nodedeploy_pg_khd1

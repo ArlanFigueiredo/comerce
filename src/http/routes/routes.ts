@@ -15,6 +15,9 @@ import { authenticateUser } from '../controller/user/authenticate'
 import { profile } from '../controller/user/profile'
 import { verifyJWT } from '../controller/middleware/verify-jwt'
 import { refresh } from '../controller/user/refersh'
+import { getAll } from '../controller/user/teste'
+import { registerSendPromotation } from '../controller/send-promotation/register'
+import { registerContact } from '../controller/contact/register'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/users', getAllUsers)
@@ -24,7 +27,7 @@ export async function appRoutes(app: FastifyInstance) {
   app.get('/me', { onRequest: [verifyJWT] }, profile)
   app.patch('/token/refresh', refresh)
 
-  app.put('/recoverpassword', recoverPassword)
+  app.put('/recoverpassword/:token', recoverPassword)
   app.post('/adm', registerAdm)
 
   app.get('/products', getAllProducts)
@@ -36,4 +39,9 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.post('/order/:product_id/:user_id', registerOrder)
   app.get('/orders', getAllOrders)
+
+  app.post('/find', getAll)
+
+  app.post('/sendpromotation', registerSendPromotation)
+  app.post('/sendcontact', registerContact)
 }

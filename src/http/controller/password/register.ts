@@ -11,11 +11,8 @@ export async function registerTokenPassword(
   const registerPasswordFactorie = factorieRegisterPassword()
   const sendingEmail = factorieServiceSendingEmailRegisterTokenPassword()
 
-  const numeroAleatorio = Math.floor(Math.random() * 900000) + 100000
-  console.log(numeroAleatorio)
-  const newToken = numeroAleatorio.toString()
   const registerBodySchema = z.object({
-    email: z.coerce.string().default(newToken),
+    email: z.coerce.string().email(),
     used: z.coerce.number().default(0),
   })
 
@@ -33,7 +30,6 @@ export async function registerTokenPassword(
     return res.status(201).send({
       message: 'Created token sucessfully!',
       token: password.password.token,
-      newToken,
     })
   } catch (error) {
     if (error instanceof UserDoesNotExistError) {

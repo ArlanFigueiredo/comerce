@@ -9,7 +9,27 @@ interface UpdateUser {
   password?: string
 }
 
+
+
 export class PrismaUserRepository implements UserRepository {
+  async findAllUsersByEmail(email:string[]):Promise<User[] | null>{
+    
+    const listEmail:string[] = []
+
+    email.forEach((list) => {
+      listEmail.push(list)
+    })
+
+    const user = await prisma.user.findMany({
+      where: {
+        email: {
+          in: listEmail
+        },
+      }
+    })
+    return user
+  }
+
   async findAllUsers(): Promise<User[] | null> {
     const user = await prisma.user.findMany()
     return user

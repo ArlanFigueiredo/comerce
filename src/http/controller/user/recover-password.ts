@@ -9,12 +9,17 @@ import { z } from 'zod'
 export async function recoverPassword(req: FastifyRequest, res: FastifyReply) {
   const recoverPasswordFactorie = factorieRecoverPassword()
 
-  const updateBodySchema = z.object({
+  const updateParamsSchema = z.object({
     token: z.coerce.string(),
+  })
+
+  const updateBodySchema = z.object({
     password: z.coerce.string(),
   })
 
-  const { token, password } = updateBodySchema.parse(req.body)
+  const { token } = updateParamsSchema.parse(req.params)
+
+  const { password } = updateBodySchema.parse(req.body)
 
   try {
     await recoverPasswordFactorie.execute({

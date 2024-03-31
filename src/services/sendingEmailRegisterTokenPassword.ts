@@ -74,7 +74,7 @@ export class ServiceSendingEmailRegisterTokenPassword {
           <h1>Bem-Vindo à Loja PEN!</h1>
           <p>Olá,</p>
           <p>Token de recuperação de senha</p>
-          <p><a href=" https://stylus-commerce.netlify.app/${token}" class="button" style="color: #fff;">Recuperar senha</a></p>
+          <p><a href=" https://stylus-commerce.netlify.app/passwordrecover/${token}" class="button" style="color: #fff;">Recuperar senha</a></p>
           <p>Atenciosamente,<br>Equipe Loja PEN</p>
       </div>
       </body>

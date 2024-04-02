@@ -61,14 +61,18 @@ model Product {
 }
 
 model Order {
-  id               String   @id @default(uuid())
-  quantity_product Int
-  total_price      Int
-  created_at       DateTime @default(now())
-  product          Product  @relation(fields: [product_id], references: [id])
-  product_id       String
-  user             User     @relation(fields: [user_id], references: [id])
-  user_id          String
+  id                   String   @id @default(uuid())
+  quantity_product     Int
+  total_price          Int
+  subtotal             Int
+  discount_value_total Int?     @default(0)
+  created_at           DateTime @default(now())
+  product              Product  @relation(fields: [product_id], references: [id])
+  product_id           String
+  user                 User     @relation(fields: [user_id], references: [id])
+  user_id              String
+  coupon               Coupon?  @relation(fields: [coupon_id], references: [id])
+  coupon_id            String?
 
   @@map("orders")
 }
@@ -109,4 +113,16 @@ model SendPromotation {
   email  String
 
   @@map("send_promotations")
+}
+
+model Coupon {
+  id             String   @id @default(uuid())
+  name           String   @unique
+  discount_value Int
+  discount_type  String
+  active         Boolean
+  created_at     DateTime @default(now())
+  Order          Order[]
+
+  @@map("coupons")
 }

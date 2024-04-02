@@ -12,6 +12,9 @@ export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
   const registerBodySchema = z.object({
     quantity_product: z.coerce.number(),
     total_price: z.coerce.number(),
+    subtotal: z.coerce.number(),
+    discount_value_total: z.coerce.number().optional(),
+    coupon_id: z.coerce.string().optional(),
   })
 
   const registerParamsSchema = z.object({
@@ -19,15 +22,24 @@ export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
     user_id: z.coerce.string(),
   })
 
-  const { quantity_product, total_price } = registerBodySchema.parse(req.body)
+  const {
+    quantity_product,
+    total_price,
+    subtotal,
+    discount_value_total,
+    coupon_id,
+  } = registerBodySchema.parse(req.body)
   const { product_id, user_id } = registerParamsSchema.parse(req.params)
 
   try {
     const result = await registerOrderFactories.execute({
       quantity_product,
       total_price,
+      subtotal,
+      discount_value_total,
       product_id,
       user_id,
+      coupon_id,
     })
     await sendingEmail.serviceSendingEmail({
       email: result.user.email,

@@ -18,6 +18,8 @@ import { refresh } from '../controller/user/refersh'
 import { getAll } from '../controller/user/teste'
 import { registerSendPromotation } from '../controller/send-promotation/register'
 import { registerContact } from '../controller/contact/register'
+import { registerCoupon } from '../controller/coupon/register'
+import { getByName } from '../controller/coupon/get-by-name'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/users', getAllUsers)
@@ -44,4 +46,7 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.post('/sendpromotation', registerSendPromotation)
   app.post('/sendcontact', registerContact)
+
+  app.post('/coupon', registerCoupon)
+  app.get('/coupon/:name', getByName)
 }

@@ -14,8 +14,11 @@ interface RegisterOrderUseCaseResponse {
 interface RegisterOrderUseCaseRequest {
   quantity_product: number
   total_price: number
+  subtotal: number
+  discount_value_total?: number
   product_id: string
   user_id: string
+  coupon_id?: string
 }
 
 export class RegisterOrderUseCase {
@@ -28,8 +31,11 @@ export class RegisterOrderUseCase {
   async execute({
     quantity_product,
     total_price,
+    subtotal,
+    discount_value_total,
     product_id,
     user_id,
+    coupon_id,
   }: RegisterOrderUseCaseRequest): Promise<RegisterOrderUseCaseResponse> {
     const user = await this.userRepository.findById(user_id)
     if (!user) {
@@ -45,8 +51,11 @@ export class RegisterOrderUseCase {
     const order = await this.orderRepository.create({
       quantity_product,
       total_price,
+      subtotal,
+      discount_value_total,
       product_id,
       user_id,
+      coupon_id,
     })
     return {
       order,

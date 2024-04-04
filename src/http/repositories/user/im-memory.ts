@@ -11,6 +11,10 @@ import { UserRepository } from './user-repository'
 export class ImMemoryUserRepository implements UserRepository {
   public users: User[] = []
 
+  async findAllUsersByEmail() {
+    return this.users
+  }
+
   async findAllUsers() {
     return this.users
   }

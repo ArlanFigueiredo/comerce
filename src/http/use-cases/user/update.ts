@@ -1,7 +1,6 @@
-import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
-import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { UserRepository } from '@/http/repositories/user/user-repository'
 import { User } from '@prisma/client'
+import { ErrosUserUseCase } from './errors/register'
 
 interface UpdateUserUseCaseRequest {
   id: string
@@ -13,7 +12,10 @@ interface UpdateUserUseCaseResponse {
   user: User | null
 }
 export class UpdateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private errosUserUseCase: ErrosUserUseCase,
+  ) {}
 
   async execute({
     id,
@@ -21,14 +23,9 @@ export class UpdateUserUseCase {
     email,
     password,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
-    const userExist = await this.userRepository.findById(id)
-    if (!userExist) {
-      throw new UserDoesNotExistError()
-    }
+    const userExist = await this.errosUserUseCase.checkUserDoesNotExistById(id)
 
-    if (email === userExist.email) {
-      throw new UserAlredyExistError()
-    }
+    await this.errosUserUseCase.checkDataEquality(email, userExist.email)
 
     const user = await this.userRepository.update({
       id,

@@ -17,7 +17,6 @@ export class GetUserProfileUserUseCase {
     userId,
   }: GetUserProfileUserUseCaseRequest): Promise<GetUserProfileUserUseCaseResponse> {
     const user = await this.userRepository.findById(userId)
-
     if (!user) {
       throw new ResourceNotFoundError()
     }

@@ -54,7 +54,7 @@ export async function authenticateUser(req: FastifyRequest, res: FastifyReply) {
         message: error.message,
       })
     }
-    return res.status(500).send({
+    return res.status(409).send({
       error,
     })
   }

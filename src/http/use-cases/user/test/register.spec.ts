@@ -1,14 +1,19 @@
+import { ImMemoryErrosUserUseCase } from './../errors/Im-memory'
 import { expect, describe, it } from 'vitest'
 import { RegisterUserUseCase } from '../register'
 import { compare } from 'bcryptjs'
 import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
-
 import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
 
 describe('Register User Use Case', () => {
   it('should hash user password upon registration', async () => {
+    const inMemoryUserRepository = new ImMemoryUserRepository()
+    const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
+      inMemoryUserRepository,
+    )
     const { user } = await new RegisterUserUseCase(
-      new ImMemoryUserRepository(),
+      inMemoryUserRepository,
+      imMemoryErrosUserUseCase,
     ).execute({
       name: 'ExampleName',
       email: 'example1@example.com',
@@ -21,7 +26,13 @@ describe('Register User Use Case', () => {
 
   it('Checking if the user is not registering twice', async () => {
     const inMemoryUserRepository = new ImMemoryUserRepository()
-    const registerUserUseCase = new RegisterUserUseCase(inMemoryUserRepository)
+    const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
+      inMemoryUserRepository,
+    )
+    const registerUserUseCase = new RegisterUserUseCase(
+      inMemoryUserRepository,
+      imMemoryErrosUserUseCase,
+    )
 
     inMemoryUserRepository.create({
       id: '0001',

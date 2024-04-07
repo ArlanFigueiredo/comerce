@@ -26,10 +26,14 @@ export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
     return user
   }
 
-  async checkDataEquality(value1: string | undefined, value2: string) {
-    if (value1 === value2) {
+  async checkDataEquality(
+    expectedValue: string | undefined,
+    actualValue: string,
+  ) {
+    if (expectedValue === actualValue) {
       throw new UserAlredyExistError()
     }
+    return null
   }
 
   async checkUserDoesNotByEmail(email: string) {
@@ -40,10 +44,17 @@ export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
     return emailExist
   }
 
-  async checkPasswordEquality(password_1: string, password_2: string) {
-    const isPasswordHashed = await compare(password_1, password_2)
+  async checkPasswordEquality(
+    passwordWithoutHash: string,
+    passwordWithHash: string,
+  ) {
+    const isPasswordHashed = await compare(
+      passwordWithoutHash,
+      passwordWithHash,
+    )
     if (isPasswordHashed === false) {
       throw new InvalidCredentialsError()
     }
+    return null
   }
 }

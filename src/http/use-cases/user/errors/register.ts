@@ -39,6 +39,7 @@ export class ErrosUserUseCase implements IUserErrorUseCase {
     if (expectedValue === actualValue) {
       throw new UserAlredyExistError()
     }
+    return null
   }
 
   async checkPasswordEquality(
@@ -52,5 +53,6 @@ export class ErrosUserUseCase implements IUserErrorUseCase {
     if (isPasswordHashed === false) {
       throw new InvalidCredentialsError()
     }
+    return null
   }
 }

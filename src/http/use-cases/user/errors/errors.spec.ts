@@ -1,9 +1,9 @@
-import { expect, describe, it } from 'vitest'
-import { ImMemoryErrosUserUseCase } from './Im-memory'
-import { RegisterUserUseCase } from '../register'
 import { InvalidCredentialsError } from '@/error/user/credentialsInvalidError'
 import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
 import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
+import { expect, describe, it } from 'vitest'
+import { RegisterUserUseCase } from '../register'
+import { ImMemoryErrosUserUseCase } from './Im-memory'
 import { ResourceNotFoundError } from '@/error/user/reousorceNotFoundError'
 
 describe('Testing error handling (exceptions) for the user use case', () => {
@@ -51,16 +51,30 @@ describe('Testing error handling (exceptions) for the user use case', () => {
 
     expect(result).toBeNull()
   })
+
   //
   //
-  it('It should return an instance error => ResourceNotFoundError', async () => {
+
+  it('It should return an instance error => UserDoesNotExistError', async () => {
     const inMemoryUserRepository = new ImMemoryUserRepository()
     const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
       inMemoryUserRepository,
     )
-    await expect(() =>
-      imMemoryErrosUserUseCase.checkUserDoesNotExistById('1'),
-    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+
+    const registerUserUseCase = new RegisterUserUseCase(
+      inMemoryUserRepository,
+      imMemoryErrosUserUseCase,
+    )
+
+    await registerUserUseCase.execute({
+      name: 'ExampleName',
+      email: 'example1@gmail.com',
+      password: '123456',
+    })
+
+    expect(async () => {
+      await imMemoryErrosUserUseCase.checkUserDoesNotExistById('000')
+    }).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 
   it('It should return user', async () => {
@@ -88,11 +102,6 @@ describe('Testing error handling (exceptions) for the user use case', () => {
 
   //
   //
-  //
-  //
-  //
-  //
-  //
 
   it('It should return an instance error => InvalidCredentialsError', async () => {
     const inMemoryUserRepository = new ImMemoryUserRepository()
@@ -107,7 +116,7 @@ describe('Testing error handling (exceptions) for the user use case', () => {
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
-  it('It should return user', async () => {
+  it('It should return an instance error => InvalidCredentialsError', async () => {
     const inMemoryUserRepository = new ImMemoryUserRepository()
     const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
       inMemoryUserRepository,

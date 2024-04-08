@@ -36,7 +36,7 @@ describe('Register User Use Case', () => {
 
     inMemoryUserRepository.create({
       id: '0001',
-      name: 'Arlan Figueiredo',
+      name: 'ExampleName',
       email: 'example1@example.com',
       password: '123456',
       created_at: new Date(),
@@ -44,7 +44,7 @@ describe('Register User Use Case', () => {
 
     await expect(() =>
       registerUserUseCase.execute({
-        name: 'Arlan Figueiredo',
+        name: 'ExampleName',
         email: 'example1@example.com',
         password: '123456',
       }),

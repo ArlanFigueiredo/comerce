@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -99,7 +99,23 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -139,21 +155,24 @@
 <span class="cstat-no" title="statement not covered" >import { registerUserFactorie } from '@/http/use-cases/user/factories/register'</span>
 <span class="cstat-no" title="statement not covered" >import { factorieServiceSendingEmailRegisterUser } from '@/services/factories/sendingEmailRegisterUser'</span>
 <span class="cstat-no" title="statement not covered" >import { FastifyReply, FastifyRequest } from 'fastify'</span>
-<span class="cstat-no" title="statement not covered" >import { z } from 'zod'</span>
+<span class="cstat-no" title="statement not covered" >import { RegisterFormErrorHandling } from './errors/register'</span>
+<span class="cstat-no" title="statement not covered" >import { validateRegisterBodySchema } from './zod-validation/register'</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export async function register(req: FastifyRequest, res: FastifyReply) {</span>
 <span class="cstat-no" title="statement not covered" >  const factorieUserRegister = registerUserFactorie()</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const sendingEmail = factorieServiceSendingEmailRegisterUser()</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const registerBodySchema = z.object({</span>
-<span class="cstat-no" title="statement not covered" >    name: z.coerce.string(),</span>
-<span class="cstat-no" title="statement not covered" >    email: z.coerce.string().email(),</span>
-<span class="cstat-no" title="statement not covered" >    password: z.coerce.string().min(6),</span>
-<span class="cstat-no" title="statement not covered" >  })</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const { name, email, password } = registerBodySchema.parse(req.body)</span>
+<span class="cstat-no" title="statement not covered" >  const { name, email, password } = await validateRegisterBodySchema(req)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    const response = await RegisterFormErrorHandling({</span>
+<span class="cstat-no" title="statement not covered" >      res,</span>
+<span class="cstat-no" title="statement not covered" >      name,</span>
+<span class="cstat-no" title="statement not covered" >      email,</span>
+<span class="cstat-no" title="statement not covered" >      password,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    console.log(response)</span>
 <span class="cstat-no" title="statement not covered" >    await factorieUserRegister.execute({</span>
 <span class="cstat-no" title="statement not covered" >      name,</span>
 <span class="cstat-no" title="statement not covered" >      email,</span>
@@ -162,13 +181,18 @@
 <span class="cstat-no" title="statement not covered" >    await sendingEmail.serviceSendingEmail({</span>
 <span class="cstat-no" title="statement not covered" >      email,</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    return res.status(201).send({</span>
+<span class="cstat-no" title="statement not covered" >      message: 'Usuario criado com sucesso!',</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >    if (error instanceof UserAlredyExistError) {</span>
 <span class="cstat-no" title="statement not covered" >      return res.status(409).send({</span>
 <span class="cstat-no" title="statement not covered" >        message: error.message,</span>
 <span class="cstat-no" title="statement not covered" >      })</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(500).send()</span>
+<span class="cstat-no" title="statement not covered" >    return res.status(409).send({</span>
+<span class="cstat-no" title="statement not covered" >      error,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
@@ -178,7 +202,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-07T21:43:40.368Z
+                at 2024-04-08T02:16:40.402Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/54</span>
+                <span class='fraction'>0/66</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/54</span>
+                <span class='fraction'>0/66</span>
             </div>
         
             
@@ -117,7 +117,31 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -174,9 +198,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { z } from 'zod'</span></span></span>
 <span class="cstat-no" title="statement not covered" >import { FastifyReply, FastifyRequest } from 'fastify'</span>
 <span class="cstat-no" title="statement not covered" >import { factorieRegisterOrder } from '@/http/use-cases/order/factories/register'</span>
-<span class="cstat-no" title="statement not covered" >import { ProducDoesNotExistsError } from '@/error/product/productDoesNotExistError'</span>
 <span class="cstat-no" title="statement not covered" >import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'</span>
 <span class="cstat-no" title="statement not covered" >import { factorieServiceSendingEmailRegisterOrder } from '@/services/factories/sendingEmailRegisterOrder'</span>
+<span class="cstat-no" title="statement not covered" >import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export async function registerOrder(req: FastifyRequest, res: FastifyReply) {</span>
 <span class="cstat-no" title="statement not covered" >  const registerOrderFactories = factorieRegisterOrder()</span>
@@ -185,6 +209,9 @@
 <span class="cstat-no" title="statement not covered" >  const registerBodySchema = z.object({</span>
 <span class="cstat-no" title="statement not covered" >    quantity_product: z.coerce.number(),</span>
 <span class="cstat-no" title="statement not covered" >    total_price: z.coerce.number(),</span>
+<span class="cstat-no" title="statement not covered" >    subtotal: z.coerce.number(),</span>
+<span class="cstat-no" title="statement not covered" >    discount_value_total: z.coerce.number().optional(),</span>
+<span class="cstat-no" title="statement not covered" >    coupon_id: z.coerce.string().optional(),</span>
 <span class="cstat-no" title="statement not covered" >  })</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const registerParamsSchema = z.object({</span>
@@ -192,15 +219,24 @@
 <span class="cstat-no" title="statement not covered" >    user_id: z.coerce.string(),</span>
 <span class="cstat-no" title="statement not covered" >  })</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const { quantity_product, total_price } = registerBodySchema.parse(req.body)</span>
+<span class="cstat-no" title="statement not covered" >  const {</span>
+<span class="cstat-no" title="statement not covered" >    quantity_product,</span>
+<span class="cstat-no" title="statement not covered" >    total_price,</span>
+<span class="cstat-no" title="statement not covered" >    subtotal,</span>
+<span class="cstat-no" title="statement not covered" >    discount_value_total,</span>
+<span class="cstat-no" title="statement not covered" >    coupon_id,</span>
+<span class="cstat-no" title="statement not covered" >  } = registerBodySchema.parse(req.body)</span>
 <span class="cstat-no" title="statement not covered" >  const { product_id, user_id } = registerParamsSchema.parse(req.params)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    const result = await registerOrderFactories.execute({</span>
 <span class="cstat-no" title="statement not covered" >      quantity_product,</span>
 <span class="cstat-no" title="statement not covered" >      total_price,</span>
+<span class="cstat-no" title="statement not covered" >      subtotal,</span>
+<span class="cstat-no" title="statement not covered" >      discount_value_total,</span>
 <span class="cstat-no" title="statement not covered" >      product_id,</span>
 <span class="cstat-no" title="statement not covered" >      user_id,</span>
+<span class="cstat-no" title="statement not covered" >      coupon_id,</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" >    await sendingEmail.serviceSendingEmail({</span>
 <span class="cstat-no" title="statement not covered" >      email: result.user.email,</span>
@@ -214,7 +250,7 @@
 <span class="cstat-no" title="statement not covered" >    })</span>
 <span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >    if (</span>
-<span class="cstat-no" title="statement not covered" >      error instanceof ProducDoesNotExistsError ||</span>
+<span class="cstat-no" title="statement not covered" >      error instanceof ProductDoesNotExistsError ||</span>
 <span class="cstat-no" title="statement not covered" >      error instanceof UserDoesNotExistError</span>
 <span class="cstat-no" title="statement not covered" >    ) {</span>
 <span class="cstat-no" title="statement not covered" >      return res.status(409).send({</span>
@@ -232,7 +268,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-19T01:13:45.782Z
+                at 2024-04-07T21:43:40.368Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

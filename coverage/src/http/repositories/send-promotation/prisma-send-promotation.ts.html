@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/services/upload/product/register.ts</title>
+    <title>Code coverage report for src/http/repositories/send-promotation/prisma-send-promotation.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/services/upload/product</a> register.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/http/repositories/send-promotation</a> prisma-send-promotation.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -99,7 +99,10 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -135,40 +138,46 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { ProductDoesNotExistsError } from '@/error/product/productDoesNotExistError'</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { ProductRepository } from '@/http/repositories/product/product-repository'</span>
-<span class="cstat-no" title="statement not covered" >import { UploadImgProductRepository } from '@/http/repositories/upload-img-product/upload-img-product-repository'</span>
-<span class="cstat-no" title="statement not covered" >import { ImgProdut } from '@prisma/client'</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { Prisma, SendPromotation } from '@prisma/client'</span></span></span>
+<span class="cstat-no" title="statement not covered" >import { SendPromotationRepository } from './send-promotation-repository'</span>
+<span class="cstat-no" title="statement not covered" >import { prisma } from '@/lib/prisma'</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >interface UploadImgProductRequest {</span>
-<span class="cstat-no" title="statement not covered" >  product_id: string</span>
-<span class="cstat-no" title="statement not covered" >  link_file: string</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" >interface UploadImgProductResponse {</span>
-<span class="cstat-no" title="statement not covered" >  img_product: ImgProdut</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" >export class UploadImgProduct {</span>
-<span class="cstat-no" title="statement not covered" >  constructor(</span>
-<span class="cstat-no" title="statement not covered" >    private uploadImgProductRepository: UploadImgProductRepository,</span>
-<span class="cstat-no" title="statement not covered" >    private productRepository: ProductRepository,</span>
-<span class="cstat-no" title="statement not covered" >  ) {}</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  async execute({</span>
-<span class="cstat-no" title="statement not covered" >    product_id,</span>
-<span class="cstat-no" title="statement not covered" >    link_file,</span>
-<span class="cstat-no" title="statement not covered" >  }: UploadImgProductRequest): Promise&lt;UploadImgProductResponse&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const product = await this.productRepository.findById(product_id)</span>
-<span class="cstat-no" title="statement not covered" >    if (!product) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new ProductDoesNotExistsError()</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    const img_product = await this.uploadImgProductRepository.create({</span>
-<span class="cstat-no" title="statement not covered" >      product_id,</span>
-<span class="cstat-no" title="statement not covered" >      link_file,</span>
+<span class="cstat-no" title="statement not covered" >export class PrismaSendPromotationRepository</span>
+<span class="cstat-no" title="statement not covered" >  implements SendPromotationRepository</span>
+<span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  async findById(id: string): Promise&lt;SendPromotation | null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const sendPromotation = await prisma.sendPromotation.findUnique({</span>
+<span class="cstat-no" title="statement not covered" >      where: {</span>
+<span class="cstat-no" title="statement not covered" >        id,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
 <span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    return sendPromotation</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-<span class="cstat-no" title="statement not covered" >      img_product,</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  async findByEmail(email: string): Promise&lt;SendPromotation | null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const sendPromotation = await prisma.sendPromotation.findFirst({</span>
+<span class="cstat-no" title="statement not covered" >      where: {</span>
+<span class="cstat-no" title="statement not covered" >        email,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    return sendPromotation</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  async findAllSendPromotation(): Promise&lt;SendPromotation[]&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const sendPromotations = await prisma.sendPromotation.findMany()</span>
+<span class="cstat-no" title="statement not covered" >    return sendPromotations</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  async create(</span>
+<span class="cstat-no" title="statement not covered" >    data: Prisma.SendPromotationCreateInput,</span>
+<span class="cstat-no" title="statement not covered" >  ): Promise&lt;SendPromotation&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const sendPromotation = await prisma.sendPromotation.create({</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    return sendPromotation</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
@@ -178,7 +187,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-19T01:13:45.782Z
+                at 2024-04-07T21:43:40.368Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

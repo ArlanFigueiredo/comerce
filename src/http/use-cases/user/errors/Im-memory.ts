@@ -1,9 +1,9 @@
 import { InvalidCredentialsError } from '@/error/user/credentialsInvalidError'
 import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
-import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
 import { compare } from 'bcryptjs'
 import { ErrosUserUseCase } from './register'
+import { ResourceNotFoundError } from '@/error/user/reousorceNotFoundError'
 
 export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
   constructor(private imMemoryUserRepository: ImMemoryUserRepository) {
@@ -21,7 +21,7 @@ export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
   async checkUserDoesNotExistById(id: string) {
     const user = await this.imMemoryUserRepository.findById(id)
     if (!user) {
-      throw new UserDoesNotExistError()
+      throw new ResourceNotFoundError()
     }
     return user
   }
@@ -30,6 +30,7 @@ export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
     if (value1 === value2) {
       throw new UserAlredyExistError()
     }
+    return null
   }
 
   async checkUserDoesNotByEmail(email: string) {
@@ -45,5 +46,6 @@ export class ImMemoryErrosUserUseCase extends ErrosUserUseCase {
     if (isPasswordHashed === false) {
       throw new InvalidCredentialsError()
     }
+    return null
   }
 }

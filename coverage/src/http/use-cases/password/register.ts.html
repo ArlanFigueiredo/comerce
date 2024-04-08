@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.87% </span>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/39</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>18/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.87% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>37/39</span>
+                <span class='fraction'>18/39</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,29 +117,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { UserDoesNotExistError } from '@/error/user/userDoesNotExistError'
 import { PasswordRepository } from '@/http/repositories/password/password-repository'
@@ -155,30 +155,30 @@ interface RegisterPasswordUseCaseRequest {
 }
 &nbsp;
 export class RegisterPasswordUseCase {
-  constructor(
-    private passwordRepository: PasswordRepository,
-    private userRepository: UserRepository,
-  ) {}
+<span class="fstat-no" title="function not covered" >  constructor(</span>
+<span class="cstat-no" title="statement not covered" >    private passwordRepository: PasswordRepository,</span>
+<span class="cstat-no" title="statement not covered" >    private userRepository: UserRepository,</span>
+<span class="cstat-no" title="statement not covered" >  ) {}</span>
 &nbsp;
-  async execute({
-    email,
-    used,
-  }: RegisterPasswordUseCaseRequest): Promise&lt;RegisterPasswordUseCaseResponse&gt; {
-    const user = await this.userRepository.findByEmail(email)
-    if (!user) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="fstat-no" title="function not covered" >  async execute({</span>
+<span class="cstat-no" title="statement not covered" >    email,</span>
+<span class="cstat-no" title="statement not covered" >    used,</span>
+<span class="cstat-no" title="statement not covered" >  }: RegisterPasswordUseCaseRequest): Promise&lt;RegisterPasswordUseCaseResponse&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const user = await this.userRepository.findByEmail(email)</span>
+<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new UserDoesNotExistError()</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-    const password = await this.passwordRepository.create({
-      email,
-      used,
-      user_id: user.id,
-    })
-&nbsp;
-    return {
-      password,
-    }
-  }
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const password = await this.passwordRepository.create({</span>
+<span class="cstat-no" title="statement not covered" >      email,</span>
+<span class="cstat-no" title="statement not covered" >      used,</span>
+<span class="cstat-no" title="statement not covered" >      user_id: user.id,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cstat-no" title="statement not covered" >      password,</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -187,7 +187,7 @@ export class RegisterPasswordUseCase {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-19T01:13:45.782Z
+                at 2024-04-07T21:43:40.368Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

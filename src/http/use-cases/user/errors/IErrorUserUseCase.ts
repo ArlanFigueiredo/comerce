@@ -13,10 +13,10 @@ export interface IUserErrorUseCase {
   checkDataEquality(
     expectedValue: string | undefined,
     actualValue: string,
-  ): Promise<InvalidCredentialsError | void>
+  ): Promise<InvalidCredentialsError | null>
 
   checkPasswordEquality(
     passwordWithoutHash: string,
     passwordWithHash: string,
-  ): Promise<InvalidCredentialsError | void>
+  ): Promise<InvalidCredentialsError | null>
 }

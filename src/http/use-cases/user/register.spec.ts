@@ -1,9 +1,9 @@
-import { ImMemoryErrosUserUseCase } from './../errors/Im-memory'
 import { expect, describe, it } from 'vitest'
-import { RegisterUserUseCase } from '../register'
 import { compare } from 'bcryptjs'
 import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
 import { UserAlredyExistError } from '@/error/user/userAlredyExistError'
+import { ImMemoryErrosUserUseCase } from './errors/Im-memory'
+import { RegisterUserUseCase } from './register'
 
 describe('Register User Use Case', () => {
   it('should hash user password upon registration', async () => {

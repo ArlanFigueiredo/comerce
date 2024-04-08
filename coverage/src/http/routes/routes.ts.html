@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/52</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/52</span>
             </div>
         
             
@@ -95,7 +95,47 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -140,13 +180,25 @@
 <span class="cstat-no" title="statement not covered" >import { recoverPassword } from '../controller/user/recover-password'</span>
 <span class="cstat-no" title="statement not covered" >import { updateUser } from '../controller/user/update'</span>
 <span class="cstat-no" title="statement not covered" >import { getAllUsers } from '../controller/user/get'</span>
+<span class="cstat-no" title="statement not covered" >import { authenticateUser } from '../controller/user/authenticate'</span>
+<span class="cstat-no" title="statement not covered" >import { profile } from '../controller/user/profile'</span>
+<span class="cstat-no" title="statement not covered" >import { verifyJWT } from '../controller/middleware/verify-jwt'</span>
+<span class="cstat-no" title="statement not covered" >import { refresh } from '../controller/user/refersh'</span>
+<span class="cstat-no" title="statement not covered" >import { getAll } from '../controller/user/teste'</span>
+<span class="cstat-no" title="statement not covered" >import { registerSendPromotation } from '../controller/send-promotation/register'</span>
+<span class="cstat-no" title="statement not covered" >import { registerContact } from '../controller/contact/register'</span>
+<span class="cstat-no" title="statement not covered" >import { registerCoupon } from '../controller/coupon/register'</span>
+<span class="cstat-no" title="statement not covered" >import { getByName } from '../controller/coupon/get-by-name'</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export async function appRoutes(app: FastifyInstance) {</span>
 <span class="cstat-no" title="statement not covered" >  app.get('/users', getAllUsers)</span>
 <span class="cstat-no" title="statement not covered" >  app.post('/users', register)</span>
-<span class="cstat-no" title="statement not covered" >  app.put('/user/:id', updateUser)</span>
+<span class="cstat-no" title="statement not covered" >  app.put('/user/:id', { onRequest: [verifyJWT] }, updateUser)</span>
+<span class="cstat-no" title="statement not covered" >  app.post('/authenticate', authenticateUser)</span>
+<span class="cstat-no" title="statement not covered" >  app.get('/me', { onRequest: [verifyJWT] }, profile)</span>
+<span class="cstat-no" title="statement not covered" >  app.patch('/token/refresh', refresh)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  app.put('/recoverpassword', recoverPassword)</span>
+<span class="cstat-no" title="statement not covered" >  app.put('/recoverpassword/:token', recoverPassword)</span>
 <span class="cstat-no" title="statement not covered" >  app.post('/adm', registerAdm)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  app.get('/products', getAllProducts)</span>
@@ -158,6 +210,14 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  app.post('/order/:product_id/:user_id', registerOrder)</span>
 <span class="cstat-no" title="statement not covered" >  app.get('/orders', getAllOrders)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  app.post('/find', getAll)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  app.post('/sendpromotation', registerSendPromotation)</span>
+<span class="cstat-no" title="statement not covered" >  app.post('/sendcontact', registerContact)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  app.post('/coupon', registerCoupon)</span>
+<span class="cstat-no" title="statement not covered" >  app.get('/coupon/:name', getByName)</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
@@ -166,7 +226,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-19T01:13:45.782Z
+                at 2024-04-07T21:43:40.368Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

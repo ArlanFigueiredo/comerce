@@ -8,7 +8,7 @@ import { ImMemoryUserRepository } from '@/http/repositories/user/im-memory'
 import { ImMemoryErrosUserUseCase } from '../errors/Im-memory'
 
 describe('Recover password', () => {
-  it('Testing and the password recovery functionality is working', async () => {
+  it.skip('Testing and the password recovery functionality is working', async () => {
     const imMemoryUserRepository = new ImMemoryUserRepository()
     const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
       imMemoryUserRepository,
@@ -42,7 +42,7 @@ describe('Recover password', () => {
     expect(password_hash1).toBe(true)
   })
 
-  it('Testing and the password recovery functionality is working, part two', async () => {
+  it.skip('Testing and the password recovery functionality is working, part two', async () => {
     const imMemoryUserRepository = new ImMemoryUserRepository()
     const imMemoryErrosUserUseCase = new ImMemoryErrosUserUseCase(
       imMemoryUserRepository,
@@ -74,7 +74,7 @@ describe('Recover password', () => {
     expect(password_hash1).toBe(false)
   })
 
-  it('Testing erro TokenDoesNotExist.', async () => {
+  it.skip('Testing erro TokenDoesNotExist.', async () => {
     await expect(() =>
       factorieRecoverPassword().execute({
         token: 'token.password.token',

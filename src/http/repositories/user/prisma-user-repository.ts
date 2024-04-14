@@ -9,12 +9,9 @@ interface UpdateUser {
   password?: string
 }
 
-
-
 export class PrismaUserRepository implements UserRepository {
-  async findAllUsersByEmail(email:string[]):Promise<User[] | null>{
-    
-    const listEmail:string[] = []
+  async findAllUsersByEmail(email: string[]): Promise<User[] | null> {
+    const listEmail: string[] = []
 
     email.forEach((list) => {
       listEmail.push(list)
@@ -23,9 +20,9 @@ export class PrismaUserRepository implements UserRepository {
     const user = await prisma.user.findMany({
       where: {
         email: {
-          in: listEmail
+          in: listEmail,
         },
-      }
+      },
     })
     return user
   }

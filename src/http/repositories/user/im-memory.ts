@@ -1,12 +1,12 @@
 import { User, Prisma } from '@prisma/client'
 import { UserRepository } from './user-repository'
 
-// interface UpdateUser {
-//   id: string
-//   name?: string
-//   email?: string
-//   password?: string
-// }
+interface UpdateUser {
+  id: string
+  name?: string
+  email?: string
+  password?: string
+}
 
 export class ImMemoryUserRepository implements UserRepository {
   public users: User[] = []
@@ -19,7 +19,14 @@ export class ImMemoryUserRepository implements UserRepository {
     return this.users
   }
 
-  async update() {
+  async update({ id, name, email, password }: UpdateUser) {
+    const user = this.users.find((user) => user.id === id)
+    if (user) {
+      user.name = name || user.name
+      user.email = email || user.email
+      user.password = password || user.password
+      return user
+    }
     return null
   }
 

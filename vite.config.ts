@@ -3,4 +3,10 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
+  test: {
+    coverage: {
+      reporter: ['text', 'html', 'clover', 'json'],
+      reportsDirectory: './coverage/html',
+    },
+  },
 })

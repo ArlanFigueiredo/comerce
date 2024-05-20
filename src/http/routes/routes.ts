@@ -29,7 +29,7 @@ export async function appRoutes(app: FastifyInstance) {
   app.get('/me', { onRequest: [verifyJWT] }, profile)
   app.patch('/token/refresh', refresh)
 
-  app.put('/recoverpassword/:token', recoverPassword)
+  app.put('/recoverpassword', recoverPassword)
   app.post('/adm', registerAdm)
 
   app.get('/products', getAllProducts)

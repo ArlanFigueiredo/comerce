@@ -80,7 +80,7 @@ export class ServiceSendingEmailRegisterOrder {
           <h3>Quantidade: ${quantity_product}</h3>
           <h3>Valor total: R$${quantity_product * unit_price},00</h3>
           <img width="200px" src="https://http2.mlstatic.com/D_NQ_NP_798672-MLU75886717409_042024-O.webp" alt="">
-          <h4><a href="http://localhost:3000/glove" class="button" style="color: #fff;">Explorar outros Produtos</a></h4>
+          <h4><a href="https://stylus-commerce.com.br/glove" class="button" style="color: #fff;">Explorar outros Produtos</a></h4>
           <br/>
           <h4>Atenciosamente,<br>Equipe Loja STYLUS</h4>
       </div>

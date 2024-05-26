@@ -100,7 +100,7 @@ export class ServiceSendingEmailSendPromotation {
       <br />
       <br />
       <p>
-        <a href="http://localhost:3000/glove" class="button" style="color: #fff"
+        <a href="https://stylus-commerce.com.br/glove" class="button" style="color: #fff"
           >Clique aqui para ver o produto</a
         >
       </p>

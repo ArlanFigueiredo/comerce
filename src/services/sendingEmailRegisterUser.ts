@@ -73,7 +73,7 @@ export class ServiceSendingEmailRegisterUser {
           <p>Aqui na STYLUS, oferecemos um unico produto para atender às suas necessidades de um nicho bem especifico. Fique à vontade para explorar nosso site e descobrir tudo o que temos a oferecer.</p>
           <p>Se tiver alguma dúvida ou precisar de assistência, não hesite em entrar em contato conosco. Estamos aqui para ajudar!</p>
           <p>Para começar suas compras, clique no botão abaixo:</p>
-          <p><a href="http://localhost:3000/glove" class="button" style="color: #fff;">Explorar produtos</a></p>
+          <p><a href="https://stylus-commerce.com.br/glove" class="button" style="color: #fff;">Explorar produtos</a></p>
           <p>Atenciosamente,<br>Equipe Loja STYLUS</p>
       </div>
       </body>

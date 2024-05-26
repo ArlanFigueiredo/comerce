@@ -51,7 +51,7 @@ export class ServiceSendingEmailRegisterUser {
           .button {
               display: inline-block;
               padding: 10px 20px;
-              background-color: #007bff;
+              background-color: #333;
               color: #fff;
               text-decoration: none;
               border-radius: 5px;
@@ -67,14 +67,14 @@ export class ServiceSendingEmailRegisterUser {
       </head>
       <body>
       <div class="container">
-          <h1>Bem-Vindo à Loja PEN!</h1>
+          <h1>Bem-Vindo à STYLUS!</h1>
           <p>Olá,</p>
           <p>Seja bem-vindo à nossa loja! Estamos muito felizes em tê-lo(a) como nosso cliente.</p>
-          <p>Aqui na Loja PEN, oferecemos uma grande variedade de produtos para atender às suas necessidades. Fique à vontade para explorar nosso site e descobrir tudo o que temos a oferecer.</p>
+          <p>Aqui na STYLUS, oferecemos um unico produto para atender às suas necessidades de um nicho bem especifico. Fique à vontade para explorar nosso site e descobrir tudo o que temos a oferecer.</p>
           <p>Se tiver alguma dúvida ou precisar de assistência, não hesite em entrar em contato conosco. Estamos aqui para ajudar!</p>
           <p>Para começar suas compras, clique no botão abaixo:</p>
-          <p><a href="#" class="button" style="color: #fff;">Explorar produtos</a></p>
-          <p>Atenciosamente,<br>Equipe Loja PEN</p>
+          <p><a href="http://localhost:3000/glove" class="button" style="color: #fff;">Explorar produtos</a></p>
+          <p>Atenciosamente,<br>Equipe Loja STYLUS</p>
       </div>
       </body>
       </html>

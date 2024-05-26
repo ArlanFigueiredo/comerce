@@ -57,7 +57,7 @@ export class ServiceSendingEmailRegisterOrder {
           .button {
               display: inline-block;
               padding: 10px 20px;
-              background-color: #007bff;
+              background-color: #333;
               color: #fff;
               text-decoration: none;
               border-radius: 5px;
@@ -74,14 +74,15 @@ export class ServiceSendingEmailRegisterOrder {
       <body>
         <div class="container">
           <h1>Pedido gerado com sucesso!</h1>
-          <p>Olá, caso ainda não tenha pago, faça o pagamento do seu pedido para não perder a oportunidade</p>
-          <p>Nome do produto: ${name_product}</p>
-          <p>Preço da unidade: ${unit_price}</p>
-          <p>Quantidade: ${quantity_product}</p>
-          <p>Valor total: ${quantity_product * unit_price}</p>
-          <img width="200px" src="https://cdn.pixabay.com/photo/2012/04/13/18/44/pen-33237_1280.png" alt="">
-          <p><a href="#" class="button" style="color: #fff;">Explorar outros Produtos</a></p>
-          <p>Atenciosamente,<br>Equipe Loja PEN</p>
+          <h2>Olá, caso ainda não tenha pago, faça o pagamento do seu pedido para não perder a oportunidade</h2>
+          <h3>Nome do produto: ${name_product}</h3>
+          <h3>Preço da unidade: R$${unit_price},00</h3>
+          <h3>Quantidade: ${quantity_product}</h3>
+          <h3>Valor total: R$${quantity_product * unit_price},00</h3>
+          <img width="200px" src="https://http2.mlstatic.com/D_NQ_NP_798672-MLU75886717409_042024-O.webp" alt="">
+          <h4><a href="http://localhost:3000/glove" class="button" style="color: #fff;">Explorar outros Produtos</a></h4>
+          <br/>
+          <h4>Atenciosamente,<br>Equipe Loja STYLUS</h4>
       </div>
       </body>
       </html>

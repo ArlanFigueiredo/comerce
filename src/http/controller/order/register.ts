@@ -46,6 +46,7 @@ export async function registerOrder(req: FastifyRequest, res: FastifyReply) {
       name_product: result.product.name,
       quantity_product: result.order.quantity_product,
       unit_price: result.product.unit_price,
+      total_price,
     })
 
     return res.status(201).send({

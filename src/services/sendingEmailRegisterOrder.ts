@@ -5,6 +5,7 @@ interface ServiceSendingEmailRegisterOrderRequest {
   name_product: string
   quantity_product: number
   unit_price: number
+  total_price: number
 }
 
 export class ServiceSendingEmailRegisterOrder {
@@ -15,6 +16,7 @@ export class ServiceSendingEmailRegisterOrder {
     name_product,
     quantity_product,
     unit_price,
+    total_price,
   }: ServiceSendingEmailRegisterOrderRequest): Promise<void> {
     await this.sendingEmail.sedingEmail({
       from: 'arlan.carloz@gmail.com',
@@ -78,7 +80,7 @@ export class ServiceSendingEmailRegisterOrder {
           <h3>Nome do produto: ${name_product}</h3>
           <h3>Preço da unidade: R$${unit_price},00</h3>
           <h3>Quantidade: ${quantity_product}</h3>
-          <h3>Valor total: R$${quantity_product * unit_price},00</h3>
+          <h3>Valor total: R$${total_price},00</h3>
           <img width="200px" src="https://http2.mlstatic.com/D_NQ_NP_798672-MLU75886717409_042024-O.webp" alt="">
           <h4><a href="https://stylus-commerce.com.br/glove" class="button" style="color: #fff;">Explorar outros Produtos</a></h4>
           <br/>
